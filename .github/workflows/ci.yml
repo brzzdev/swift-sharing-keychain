@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+permissions:
+  contents: read
+
+jobs:
+  # The display name below is the status-check context the `main` ruleset
+  # requires, and so the gate renovate's auto-merge waits on. Renaming the job
+  # silently un-gates auto-merge — a required check that no run ever reports
+  # leaves PRs pending rather than failing, so update the ruleset in step.
+  build-test:
+    name: Build & Test
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v7
+
+      # Package.swift is swift-tools-version 6.3, which the runner image's
+      # default toolchain may predate; latest-stable pins to Xcode 26's Swift.
+      - name: Select Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Swift version
+        run: swift --version
+
+      - name: Build
+        run: swift build
+
+      - name: Test
+        run: swift test

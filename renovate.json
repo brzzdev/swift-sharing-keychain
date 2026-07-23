@@ -1,0 +1,24 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "dependencyDashboard": false,
+  "extends": [
+    "config:recommended"
+  ],
+  "packageRules": [
+    {
+      "automerge": true,
+      "automergeStrategy": "squash",
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
+    },
+    {
+      "groupName": "Point-Free",
+      "matchSourceUrls": [
+        "https://github.com/pointfreeco/**"
+      ]
+    }
+  ],
+  "platformAutomerge": true
+}
