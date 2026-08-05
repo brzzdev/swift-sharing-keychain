@@ -17,6 +17,15 @@ let package = Package(
 		),
 	],
 	dependencies: [
+		// Declared explicitly even though Sharing already pulls it in: KeychainClient
+		// and KeychainKey both `import Dependencies` directly. SwiftPM tolerates the
+		// undeclared transitive import because it links the whole resolved graph, but
+		// generators that emit one target per product — Tuist, Bazel — link only what
+		// is declared, and SharingKeychain then fails to find the Dependencies symbols.
+		.package(
+			url: "https://github.com/pointfreeco/swift-dependencies",
+			from: "1.5.1"
+		),
 		.package(
 			url: "https://github.com/pointfreeco/swift-sharing",
 			from: "2.9.1"
@@ -26,6 +35,10 @@ let package = Package(
 		.target(
 			name: "SharingKeychain",
 			dependencies: [
+				.product(
+					name: "Dependencies",
+					package: "swift-dependencies"
+				),
 				.product(
 					name: "Sharing",
 					package: "swift-sharing"
