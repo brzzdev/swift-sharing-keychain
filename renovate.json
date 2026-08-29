@@ -1,8 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "dependencyDashboard": false,
   "extends": [
-    "config:recommended"
+    "github>brzzdev/renovate-config:swift"
   ],
   "packageRules": [
     {
@@ -11,12 +10,6 @@
       "matchUpdateTypes": [
         "minor",
         "patch"
-      ]
-    },
-    {
-      "groupName": "Point-Free",
-      "matchSourceUrls": [
-        "https://github.com/pointfreeco/**"
       ]
     }
   ],
