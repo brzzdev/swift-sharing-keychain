@@ -19,7 +19,7 @@ let package = Package(
 	dependencies: [
 		.package(
 			url: "https://github.com/pointfreeco/swift-sharing",
-			from: "2.9.1"
+			from: "2.10.1"
 		),
 	],
 	targets: [
