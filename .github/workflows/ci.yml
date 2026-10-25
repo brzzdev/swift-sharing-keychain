@@ -21,7 +21,7 @@ jobs:
     name: Build & Test
     runs-on: macos-26
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       # Package.swift is swift-tools-version 6.3, which the runner image's
       # default toolchain may predate; latest-stable pins to Xcode 26's Swift.
